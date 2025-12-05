@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="sk">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3LANCER – Automatické sledovanie času pre freelancerov</title>
-  <meta name="description" content="3LANCER automaticky sleduje tvoj pracovný čas podľa polohy, skenuje bločky a tvorí prehľadné reporty. Ideálne pre živnostníkov a freelancerov." />
+  <title>3LANCER – Automatic time & expense tracking for freelancers</title>
+  <meta name="description" content="3LANCER automatically tracks your working time based on location, scans receipts and creates clear reports. Ideal for freelancers and solo contractors." />
 
   <style>
     * { box-sizing: border-box; }
@@ -16,9 +16,28 @@
     }
     header {
       background: white;
-      padding: 40px 20px 60px;
+      padding: 24px 20px 48px;
       text-align: center;
       border-bottom: 1px solid #e5e7eb;
+      position: relative;
+    }
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .lang-switcher {
+      position: absolute;
+      right: 0;
+      top: 0;
+      padding-top: 4px;
+    }
+    .lang-select {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      font-size: 13px;
+      background: #f9fafb;
     }
     .logo {
       font-weight: 800;
@@ -39,6 +58,18 @@
       color: #4b5563;
       max-width: 600px;
       margin: 0 auto;
+    }
+    .pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #dbeafe;
+      color: #1d4ed8;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
     }
     .btn-primary {
       display: inline-block;
@@ -89,18 +120,6 @@
       font-size: 15px;
       line-height: 1.5;
     }
-    .pill {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: #dbeafe;
-      color: #1d4ed8;
-      font-size: 12px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 8px;
-    }
     .pricing-box {
       background: white;
       border-radius: 14px;
@@ -124,86 +143,257 @@
     }
     @media (min-width: 768px) {
       h1 { font-size: 38px; }
+      header { padding-top: 32px; }
     }
   </style>
 </head>
 <body>
 
 <header>
-  <div class="logo"><span>3</span>LANCER</div>
-  <div class="pill">Pre živnostníkov a freelancerov</div>
-  <h1>Automatické sledovanie pracovného času podľa polohy</h1>
-  <p class="subtitle">
-    Prídeš na zákazku, 3LANCER začne počítať čas. Odídeš, čas sa zastaví.
-    Popritom naskenuje bločky a náklady priradí k projektom.
-  </p>
-  <!-- sem neskôr doplníme reálny App Store link -->
-  <a href="#" class="btn-primary">Čoskoro v App Store</a>
+  <div class="header-inner">
+    <div class="lang-switcher">
+      <select id="language-select" class="lang-select" aria-label="Language">
+        <option value="en">EN</option>
+        <option value="de">DE</option>
+        <option value="es">ES</option>
+        <option value="pl">PL</option>
+        <option value="sk">SK</option>
+      </select>
+    </div>
+
+    <div class="logo"><span>3</span>LANCER</div>
+    <div id="pill" class="pill"></div>
+    <h1 id="hero-title"></h1>
+    <p id="hero-subtitle" class="subtitle"></p>
+    <a href="#" id="hero-cta" class="btn-primary"></a>
+  </div>
 </header>
 
 <main>
   <section class="section">
-    <h2>Čo 3LANCER rieši za teba</h2>
+    <h2 id="sec1-title"></h2>
     <div class="grid">
       <div class="card">
-        <h3>📍 Automatické trackovanie času</h3>
-        <p>
-          Vytvoríš projekt, zadáš adresu a nastavíš ho ako aktívny.
-          Keď prídeš na miesto, aplikácia začne merať čas. Keď odídeš, čas sa zastaví
-          a zapíše sa do tvojho prehľadu.
-        </p>
+        <h3 id="feat1-title"></h3>
+        <p id="feat1-text"></p>
       </div>
       <div class="card">
-        <h3>🧾 Scan bločkov a faktúr</h3>
-        <p>
-          Odfotíš bloček alebo faktúru a AI ti ju rozparsuje na jednotlivé položky.
-          Tie následne priradíš konkrétnym projektom – naraz alebo po položkách.
-        </p>
+        <h3 id="feat2-title"></h3>
+        <p id="feat2-text"></p>
       </div>
       <div class="card">
-        <h3>📊 Reporty pre fakturáciu</h3>
-        <p>
-          Prehľad, koľko času si strávil na každom projekte, aké náklady s ním súvisia
-          a pripravené podklady pre fakturáciu alebo účtovníctvo.
-        </p>
+        <h3 id="feat3-title"></h3>
+        <p id="feat3-text"></p>
       </div>
     </div>
   </section>
 
   <section class="section">
-    <h2>Pre koho je 3LANCER</h2>
+    <h2 id="sec2-title"></h2>
     <div class="grid">
       <div class="card">
-        <h3>🔧 Remeselníci a montážnici</h3>
-        <p>Stavbári, elektrikári, inštalatéri, montážnici, servisní technici – všade tam, kde pracuješ u klienta.</p>
+        <h3 id="aud1-title"></h3>
+        <p id="aud1-text"></p>
       </div>
       <div class="card">
-        <h3>💻 Freelanceri na hodinovku</h3>
-        <p>IT konzultanti, dizajnéri, fotografi, marketingoví freelanceri – kde je dôležitý odpracovaný čas na projekte.</p>
+        <h3 id="aud2-title"></h3>
+        <p id="aud2-text"></p>
       </div>
       <div class="card">
-        <h3>👥 Malé tímy</h3>
-        <p>Budúca verzia umožní sledovať čas viacerým ľuďom na spoločných projektoch v jednej firme.</p>
+        <h3 id="aud3-title"></h3>
+        <p id="aud3-text"></p>
       </div>
     </div>
   </section>
 
   <section class="section">
-    <h2>Cena a jazyková podpora</h2>
+    <h2 id="sec3-title"></h2>
     <div class="pricing-box">
-      <p><strong>Platforma:</strong> iOS (iPhone)</p>
-      <p><strong>Model:</strong> 3 dni bezplatné vyskúšanie, potom mesačné predplatné.</p>
-      <p><strong>Jazyky aplikácie:</strong> slovenčina, angličtina, nemčina, španielčina, poľština.</p>
-      <p class="muted">
-        Presné cenové plány a funkcie zverejníme pri spustení aplikácie v App Store.
-      </p>
+      <p id="pricing-platform"></p>
+      <p id="pricing-model"></p>
+      <p id="pricing-languages"></p>
+      <p id="pricing-note" class="muted"></p>
     </div>
   </section>
 </main>
 
 <footer>
-  © 2025 3LANCER • 3lancer.ovh • Kontakt: (doplníš neskôr e-mail na support)
+  <span id="footer-text"></span>
 </footer>
+
+<script>
+  const translations = {
+    en: {
+      pill: "For freelancers & solo contractors",
+      heroTitle: "Automatic time tracking based on your location",
+      heroSubtitle: "You arrive at a project site, 3LANCER starts counting time. You leave, it stops. Meanwhile it scans receipts and assigns expenses to your projects.",
+      heroCta: "Launching soon on the App Store",
+      sec1Title: "What 3LANCER does for you",
+      feat1Title: "📍 Automatic time tracking",
+      feat1Text: "Create a project, set an address and mark it as active. When you are on site, the timer runs. When you leave, it stops and logs into your work history.",
+      feat2Title: "🧾 Receipt & invoice scanning",
+      feat2Text: "Take a photo of a receipt or invoice and AI will parse individual items. Assign all at once to one project, or split them item by item.",
+      feat3Title: "📊 Reports for billing",
+      feat3Text: "See how much time you spent on each project, which expenses are linked, and generate summaries ready for invoicing and accounting.",
+      sec2Title: "Who is 3LANCER for?",
+      aud1Title: "🔧 Trades & field work",
+      aud1Text: "Construction, electricians, plumbers, installers, service technicians – wherever you work on site at the client.",
+      aud2Title: "💻 Freelancers billed by the hour",
+      aud2Text: "Developers, IT consultants, designers, photographers, marketers – anywhere the hours per project matter.",
+      aud3Title: "👥 Small teams (coming soon)",
+      aud3Text: "Future versions will allow you to track time for multiple people working on shared projects in one company.",
+      sec3Title: "Pricing & language support",
+      pricingPlatform: "Platform: iOS (iPhone)",
+      pricingModel: "Model: 3-day free trial, then monthly subscription.",
+      pricingLanguages: "App languages: English, German, Spanish, Polish, Slovak.",
+      pricingNote: "Exact pricing tiers and features will be announced at launch in the App Store.",
+      footerText: "© 2025 3LANCER • 3lancer.ovh • Contact: threelancer.customer@gmail.com"
+    },
+    sk: {
+      pill: "Pre živnostníkov a freelancerov",
+      heroTitle: "Automatické sledovanie pracovného času podľa polohy",
+      heroSubtitle: "Prídeš na zákazku, 3LANCER začne počítať čas. Odídeš, čas sa zastaví. Popritom naskenuje bločky a náklady priradí k projektom.",
+      heroCta: "Čoskoro v App Store",
+      sec1Title: "Čo 3LANCER rieši za teba",
+      feat1Title: "📍 Automatické trackovanie času",
+      feat1Text: "Vytvoríš projekt, zadáš adresu a nastavíš ho ako aktívny. Keď prídeš na miesto, aplikácia začne merať čas. Keď odídeš, čas sa zastaví a zapíše sa do tvojho prehľadu.",
+      feat2Title: "🧾 Scan bločkov a faktúr",
+      feat2Text: "Odfotíš bloček alebo faktúru a AI ju rozparsuje na jednotlivé položky. Tie následne priradíš konkrétnym projektom – naraz alebo po položkách.",
+      feat3Title: "📊 Reporty pre fakturáciu",
+      feat3Text: "Prehľad, koľko času si strávil na každom projekte, aké náklady s ním súvisia a pripravené podklady pre fakturáciu alebo účtovníctvo.",
+      sec2Title: "Pre koho je 3LANCER",
+      aud1Title: "🔧 Remeselníci a montážnici",
+      aud1Text: "Stavbári, elektrikári, inštalatéri, montážnici, servisní technici – všade tam, kde pracuješ u klienta.",
+      aud2Title: "💻 Freelanceri na hodinovku",
+      aud2Text: "IT konzultanti, vývojári, dizajnéri, fotografi, marketéri – všade tam, kde je dôležitý odpracovaný čas na projekte.",
+      aud3Title: "👥 Malé tímy",
+      aud3Text: "Budúca verzia umožní sledovať čas viacerým ľuďom na spoločných projektoch v jednej firme.",
+      sec3Title: "Cena a jazyková podpora",
+      pricingPlatform: "Platforma: iOS (iPhone)",
+      pricingModel: "Model: 3 dni bezplatné vyskúšanie, potom mesačné predplatné.",
+      pricingLanguages: "Jazyky aplikácie: slovenčina, angličtina, nemčina, španielčina, poľština.",
+      pricingNote: "Presné cenové plány a funkcie zverejníme pri spustení aplikácie v App Store.",
+      footerText: "© 2025 3LANCER • 3lancer.ovh • Kontakt: (doplníš e-mail na support)"
+    },
+    de: {
+      pill: "Für Freiberufler und Selbständige",
+      heroTitle: "Automatische Zeiterfassung basierend auf deinem Standort",
+      heroSubtitle: "Du kommst auf die Baustelle oder zum Kunden – 3LANCER startet automatisch die Zeit. Du gehst, die Zeit stoppt. Belege werden gescannt und Kosten Projekten zugeordnet.",
+      heroCta: "Bald im App Store verfügbar",
+      sec1Title: "Was 3LANCER für dich erledigt",
+      feat1Title: "📍 Automatische Zeiterfassung",
+      feat1Text: "Erstelle ein Projekt, hinterlege die Adresse und markiere es als aktiv. Sobald du vor Ort bist, läuft der Timer. Wenn du gehst, wird die Zeit gestoppt und im Verlauf gespeichert.",
+      feat2Title: "🧾 Beleg- und Rechnungsscan",
+      feat2Text: "Fotografiere einen Beleg oder eine Rechnung, und die KI zerlegt sie in einzelne Positionen. Weise sie einem Projekt zu – gesammelt oder Position für Position.",
+      feat3Title: "📊 Berichte für Abrechnung",
+      feat3Text: "Sieh auf einen Blick, wie viel Zeit du auf jedem Projekt verbracht hast, welche Kosten angefallen sind, und erstelle Berichte für Abrechnung und Buchhaltung.",
+      sec2Title: "Für wen ist 3LANCER?",
+      aud1Title: "🔧 Handwerker und Außendienst",
+      aud1Text: "Bau, Elektriker, Installateure, Monteure, Servicetechniker – überall dort, wo du beim Kunden vor Ort arbeitest.",
+      aud2Title: "💻 Freiberufler auf Stundenbasis",
+      aud2Text: "Entwickler, Berater, Designer, Fotografen, Marketing-Freelancer – überall dort, wo die Stunden pro Projekt zählen.",
+      aud3Title: "👥 Kleine Teams (bald verfügbar)",
+      aud3Text: "Zukünftige Versionen ermöglichen die Zeiterfassung für mehrere Personen auf gemeinsamen Projekten.",
+      sec3Title: "Preise & Sprachunterstützung",
+      pricingPlatform: "Plattform: iOS (iPhone)",
+      pricingModel: "Modell: 3 Tage kostenlos testen, danach monatliches Abonnement.",
+      pricingLanguages: "App-Sprachen: Deutsch, Englisch, Spanisch, Polnisch, Slowakisch.",
+      pricingNote: "Genaue Preisstufen und Funktionen werden zum Start im App Store bekanntgegeben.",
+      footerText: "© 2025 3LANCER • 3lancer.ovh • Kontakt: (Support-E-Mail ergänzen)"
+    },
+    es: {
+      pill: "Para autónomos y freelancers",
+      heroTitle: "Control automático del tiempo según tu ubicación",
+      heroSubtitle: "Llegas al lugar del proyecto y 3LANCER empieza a contar el tiempo. Te vas, el tiempo se detiene. Mientras tanto, escanea tickets y asigna gastos a tus proyectos.",
+      heroCta: "Muy pronto en App Store",
+      sec1Title: "Lo que 3LANCER hace por ti",
+      feat1Title: "📍 Seguimiento automático del tiempo",
+      feat1Text: "Creas un proyecto, defines una dirección y lo marcas como activo. Cuando estás en el lugar, el temporizador corre. Cuando te vas, se detiene y se guarda en tu historial.",
+      feat2Title: "🧾 Escaneo de tickets y facturas",
+      feat2Text: "Haz una foto del ticket o factura y la IA extrae las líneas individuales. Asígnalas todas a un proyecto o repártelas por ítems.",
+      feat3Title: "📊 Informes para facturación",
+      feat3Text: "Consulta cuánto tiempo has trabajado en cada proyecto, qué gastos se han asociado y genera resúmenes listos para facturar.",
+      sec2Title: "¿Para quién es 3LANCER?",
+      aud1Title: "🔧 Oficios y trabajo de campo",
+      aud1Text: "Construcción, electricistas, fontanería, mantenimiento, técnicos de servicio: cualquier trabajo en casa del cliente.",
+      aud2Title: "💻 Freelancers por hora",
+      aud2Text: "Desarrolladores, consultores, diseñadores, fotógrafos, marketers – donde importa el tiempo por proyecto.",
+      aud3Title: "👥 Equipos pequeños (próximamente)",
+      aud3Text: "Las próximas versiones permitirán registrar el tiempo de varias personas en proyectos compartidos.",
+      sec3Title: "Precio y soporte de idiomas",
+      pricingPlatform: "Plataforma: iOS (iPhone)",
+      pricingModel: "Modelo: 3 días de prueba gratuita y luego suscripción mensual.",
+      pricingLanguages: "Idiomas de la app: español, inglés, alemán, polaco, eslovaco.",
+      pricingNote: "Los planes y funciones exactos se anunciarán en el lanzamiento en App Store.",
+      footerText: "© 2025 3LANCER • 3lancer.ovh • Contacto: (añade tu correo de soporte)"
+    },
+    pl: {
+      pill: "Dla freelancerów i jednoosobowych firm",
+      heroTitle: "Automatyczne śledzenie czasu na podstawie lokalizacji",
+      heroSubtitle: "Przyjeżdżasz na miejsce zlecenia – 3LANCER zaczyna liczyć czas. Wyjeżdżasz – czas się zatrzymuje. W międzyczasie skanujesz paragony, a koszty przypisujesz do projektów.",
+      heroCta: "Wkrótce w App Store",
+      sec1Title: "Co 3LANCER robi za ciebie",
+      feat1Title: "📍 Automatyczne śledzenie czasu",
+      feat1Text: "Tworzysz projekt, ustawiasz adres i oznaczasz go jako aktywny. Gdy jesteś na miejscu, licznik działa. Gdy wyjeżdżasz, zatrzymuje się i zapisuje w historii.",
+      feat2Title: "🧾 Skan paragonów i faktur",
+      feat2Text: "Zrób zdjęcie paragonu lub faktury, a AI rozbije je na pozycje. Możesz przypisać wszystkie do jednego projektu lub dzielić je po kolei.",
+      feat3Title: "📊 Raporty do rozliczeń",
+      feat3Text: "Sprawdzaj, ile czasu spędziłeś nad każdym projektem, jakie poniosłeś koszty i generuj raporty gotowe do rozliczeń i księgowości.",
+      sec2Title: "Dla kogo jest 3LANCER?",
+      aud1Title: "🔧 Fachowcy i praca w terenie",
+      aud1Text: "Budowlańcy, elektrycy, hydraulicy, monterzy, serwisanci – wszędzie tam, gdzie pracujesz u klienta.",
+      aud2Title: "💻 Freelancerzy rozliczani godzinowo",
+      aud2Text: "Programiści, konsultanci, projektanci, fotografowie, marketerzy – wszędzie tam, gdzie liczy się czas pracy nad projektem.",
+      aud3Title: "👥 Małe zespoły (wkrótce)",
+      aud3Text: "Przyszłe wersje pozwolą śledzić czas wielu osób w ramach wspólnych projektów w jednej firmie.",
+      sec3Title: "Cennik i języki",
+      pricingPlatform: "Platforma: iOS (iPhone)",
+      pricingModel: "Model: 3 dni darmowego testu, a potem miesięczna subskrypcja.",
+      pricingLanguages: "Języki aplikacji: polski, angielski, niemiecki, hiszpański, słowacki.",
+      pricingNote: "Dokładne plany cenowe i funkcje ogłosimy przy premierze w App Store.",
+      footerText: "© 2025 3LANCER • 3lancer.ovh • Kontakt: (dodaj e-mail wsparcia)"
+    }
+  };
+
+  function setLanguage(lang) {
+    const t = translations[lang] || translations.en;
+    document.documentElement.lang = lang === 'sk' ? 'sk' : lang;
+    document.getElementById('pill').textContent = t.pill;
+    document.getElementById('hero-title').textContent = t.heroTitle;
+    document.getElementById('hero-subtitle').textContent = t.heroSubtitle;
+    document.getElementById('hero-cta').textContent = t.heroCta;
+
+    document.getElementById('sec1-title').textContent = t.sec1Title;
+    document.getElementById('feat1-title').textContent = t.feat1Title;
+    document.getElementById('feat1-text').textContent = t.feat1Text;
+    document.getElementById('feat2-title').textContent = t.feat2Title;
+    document.getElementById('feat2-text').textContent = t.feat2Text;
+    document.getElementById('feat3-title').textContent = t.feat3Title;
+    document.getElementById('feat3-text').textContent = t.feat3Text;
+
+    document.getElementById('sec2-title').textContent = t.sec2Title;
+    document.getElementById('aud1-title').textContent = t.aud1Title;
+    document.getElementById('aud1-text').textContent = t.aud1Text;
+    document.getElementById('aud2-title').textContent = t.aud2Title;
+    document.getElementById('aud2-text').textContent = t.aud2Text;
+    document.getElementById('aud3-title').textContent = t.aud3Title;
+    document.getElementById('aud3-text').textContent = t.aud3Text;
+
+    document.getElementById('sec3-title').textContent = t.sec3Title;
+    document.getElementById('pricing-platform').textContent = t.pricingPlatform;
+    document.getElementById('pricing-model').textContent = t.pricingModel;
+    document.getElementById('pricing-languages').textContent = t.pricingLanguages;
+    document.getElementById('pricing-note').textContent = t.pricingNote;
+
+    document.getElementById('footer-text').textContent = t.footerText;
+  }
+
+  const select = document.getElementById('language-select');
+  select.addEventListener('change', () => setLanguage(select.value));
+
+  // default language
+  setLanguage('en');
+</script>
 
 </body>
 </html>
