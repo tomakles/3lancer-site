@@ -57,8 +57,8 @@
     }
 
     .logo-icon {
-      width: 48px;
-      height: 48px;
+      width: 72px;
+      height: 72px;
       border-radius: 12px;
       background: var(--bg-grey);
       object-fit: contain;
@@ -78,15 +78,35 @@
 
     .lang-switcher {
       margin-left: auto;
+      display: flex;
+      gap: 8px;
+      align-items: center;
     }
 
-    .lang-select {
-      padding: 6px 12px;
-      border-radius: 999px;
+    .lang-btn {
+      padding: 6px 10px;
+      border-radius: 6px;
       border: 1px solid var(--border-grey);
-      font-size: 13px;
+      font-size: 12px;
       background: #ffffff;
       color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-weight: 500;
+    }
+
+    .lang-btn:hover {
+      border-color: var(--primary-green);
+      color: var(--primary-green);
+    }
+
+    .lang-btn.active {
+      background: var(--primary-green);
+      color: #ffffff;
+      border-color: var(--primary-green);
     }
 
     .pill {
@@ -241,13 +261,11 @@
       </div>
 
       <div class="lang-switcher">
-        <select id="language-select" class="lang-select" aria-label="Language">
-          <option value="en">EN</option>
-          <option value="de">DE</option>
-          <option value="es">ES</option>
-          <option value="pl">PL</option>
-          <option value="sk">SK</option>
-        </select>
+        <button class="lang-btn active" data-lang="en">🇬🇧 EN</button>
+        <button class="lang-btn" data-lang="de">🇩🇪 DE</button>
+        <button class="lang-btn" data-lang="es">🇪🇸 ES</button>
+        <button class="lang-btn" data-lang="pl">🇵🇱 PL</button>
+        <button class="lang-btn" data-lang="sk">🇸🇰 SK</button>
       </div>
     </div>
 
@@ -477,10 +495,17 @@
     document.getElementById('pricing-note').textContent = t.pricingNote;
 
     document.getElementById('footer-text').textContent = t.footerText;
+
+    // Update active button
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
   }
 
-  const select = document.getElementById('language-select');
-  select.addEventListener('change', () => setLanguage(select.value));
+  // Add click handlers for language buttons
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+  });
 
   // default language
   setLanguage('en');
