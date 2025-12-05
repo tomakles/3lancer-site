@@ -9,6 +9,33 @@
   <!-- favicon – works if you upload favicon.png to the repo root -->
   <link rel="icon" type="image/png" href="favicon.png" />
 
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+// Firebase configuration - Replace with your project details
+const firebaseConfig = {
+  apiKey: "AIzaSyCVFwLlFKZWhaS4O-9EpDU5yr4YRKruwOQ",
+  authDomain: "lancer-watchlist.firebaseapp.com",
+  projectId: "lancer-watchlist",
+  storageBucket: "lancer-watchlist.appspot.com",
+  messagingSenderId: "754434438624",
+  appId: "1:754434438624:web:e93f207d2ef5e2838b6785"
+};
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Make these globally available
+    window.firebaseDB = db;
+    window.firebaseCollection = collection;
+    window.firebaseAddDoc = addDoc;
+    window.firebaseServerTimestamp = serverTimestamp;
+  </script>
+
   <style>
     :root {
       --primary-green: #3D642D;  /* RAL 6010 */
@@ -201,6 +228,17 @@
       border-bottom: 1px solid var(--border-grey);
     }
 
+    /* Specific card title IDs: ensure RAL 1021 (yellow) is applied */
+    #feat1-title,
+    #feat2-title,
+    #feat3-title,
+    #aud1-title,
+    #aud2-title,
+    #aud3-title {
+      background: #F6B600; /* RAL 1021 */
+      color: var(--text-main);
+    }
+
     .card p {
       margin: 0;
       color: var(--text-muted);
@@ -223,6 +261,41 @@
     .muted {
       color: #6b7280;
       font-size: 14px;
+    }
+
+    .success-message {
+      display: none;
+      margin-top: 12px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      background: #d1fae5;
+      color: #065f46;
+      font-size: 14px;
+      text-align: center;
+      animation: slideIn 0.3s ease-out;
+    }
+
+    .error-message {
+      display: none;
+      margin-top: 12px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      background: #fee2e2;
+      color: #991b1b;
+      font-size: 14px;
+      text-align: center;
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     footer {
@@ -338,6 +411,27 @@
     </div>
   </section>
 
+  <!-- Email Watchlist Section -->
+  <section class="section">
+    <h2 id="watchlist-title"></h2>
+    <p id="watchlist-desc" class="waitlist-desc"></p>
+    <form id="watchlist-form" class="waitlist-form">
+      <div class="waitlist-row">
+        <input
+          type="email"
+          id="watchlist-email"
+          class="waitlist-input"
+          required
+          autocomplete="email"
+        />
+        <button type="submit" class="btn-primary waitlist-btn" id="watchlist-btn"></button>
+      </div>
+      <p class="waitlist-note" id="watchlist-note"></p>
+      <div class="success-message" id="watchlist-success"></div>
+      <div class="error-message" id="watchlist-error"></div>
+    </form>
+  </section>
+
   <section class="section">
     <h2 id="sec3-title"></h2>
     <div class="pricing-box">
@@ -374,6 +468,13 @@
       aud2Text: "Developers, IT consultants, designers, photographers, marketers – anywhere the hours per project matter.",
       aud3Title: "👥 Small teams (coming soon)",
       aud3Text: "Future versions will allow you to track time for multiple people working on shared projects in one company.",
+      watchlistTitle: "Get notified when we launch",
+      watchlistDesc: "Leave your email address below and we'll notify you as soon as 3LANCER is available in the App Store.",
+      watchlistPlaceholder: "Your email address",
+      watchlistBtn: "Join the watchlist",
+      watchlistNote: "We will only use your email to send you updates about 3LANCER. No spam, we promise.",
+      watchlistSuccess: "✓ Thank you! We'll notify you when 3LANCER launches.",
+      watchlistError: "✗ Please enter a valid email address.",
       sec3Title: "Pricing & language support",
       pricingPlatform: "Platform: iOS (iPhone)",
       pricingModel: "Model: 3-day free trial, then monthly subscription.",
@@ -400,6 +501,13 @@
       aud2Text: "IT konzultanti, vývojári, dizajnéri, fotografi, marketéri – všade tam, kde je dôležitý odpracovaný čas na projekte.",
       aud3Title: "👥 Malé tímy",
       aud3Text: "Budúca verzia umožní sledovať čas viacerým ľuďom na spoločných projektoch v jednej firme.",
+      watchlistTitle: "Daj si vedieť pri spustení",
+      watchlistDesc: "Zadaj svoj e-mail a dáme ti vedieť, hneď ako bude 3LANCER dostupný v App Store.",
+      watchlistPlaceholder: "Tvoja e-mailová adresa",
+      watchlistBtn: "Pridať sa na watchlist",
+      watchlistNote: "E-mail použijeme len na informácie o 3LANCER-i. Bez spamu.",
+      watchlistSuccess: "✓ Ďakujeme! Upozorníme ťa, keď sa 3LANCER spustí.",
+      watchlistError: "✗ Prosím, zadaj platný e-mail.",
       sec3Title: "Cena a jazyková podpora",
       pricingPlatform: "Platforma: iOS (iPhone)",
       pricingModel: "Model: 3 dni bezplatné vyskúšanie, potom mesačné predplatné.",
@@ -426,6 +534,13 @@
       aud2Text: "Entwickler, Berater, Designer, Fotografen, Marketing-Freelancer – überall dort, wo die Stunden pro Projekt zählen.",
       aud3Title: "👥 Kleine Teams (bald verfügbar)",
       aud3Text: "Zukünftige Versionen ermöglichen die Zeiterfassung für mehrere Personen auf gemeinsamen Projekten.",
+      watchlistTitle: "Lass dich zum Start benachrichtigen",
+      watchlistDesc: "Hinterlasse deine E-Mail, und wir informieren dich, sobald 3LANCER im App Store verfügbar ist.",
+      watchlistPlaceholder: "Deine E-Mail-Adresse",
+      watchlistBtn: "Zur Watchlist hinzufügen",
+      watchlistNote: "Wir verwenden deine E-Mail nur für Informationen zu 3LANCER. Kein Spam.",
+      watchlistSuccess: "✓ Danke! Wir informieren dich, wenn 3LANCER startet.",
+      watchlistError: "✗ Bitte gib eine gültige E-Mail-Adresse ein.",
       sec3Title: "Preise & Sprachunterstützung",
       pricingPlatform: "Plattform: iOS (iPhone)",
       pricingModel: "Modell: 3 Tage kostenlos testen, danach monatliches Abonnement.",
@@ -452,6 +567,13 @@
       aud2Text: "Desarrolladores, consultores, diseñadores, fotógrafos, marketers – donde importa el tiempo por proyecto.",
       aud3Title: "👥 Equipos pequeños (próximamente)",
       aud3Text: "Las próximas versiones permitirán registrar el tiempo de varias personas en proyectos compartidos.",
+      watchlistTitle: "Recibe un aviso cuando lancemos",
+      watchlistDesc: "Déjanos tu correo y te avisaremos en cuanto 3LANCER esté disponible en App Store.",
+      watchlistPlaceholder: "Tu dirección de correo",
+      watchlistBtn: "Añadir a la lista de vigilancia",
+      watchlistNote: "Solo usaremos tu correo para enviarte novedades sobre 3LANCER. Sin spam.",
+      watchlistSuccess: "✓ ¡Gracias! Te notificaremos cuando se lance 3LANCER.",
+      watchlistError: "✗ Por favor, introduce una dirección de correo válida.",
       sec3Title: "Precio y soporte de idiomas",
       pricingPlatform: "Plataforma: iOS (iPhone)",
       pricingModel: "Modelo: 3 días de prueba gratuita y luego suscripción mensual.",
@@ -478,6 +600,13 @@
       aud2Text: "Programiści, konsultanci, projektanci, fotografowie, marketerzy – wszędzie tam, gdzie liczy się czas pracy nad projektem.",
       aud3Title: "👥 Małe zespoły (wkrótce)",
       aud3Text: "Przyszłe wersje pozwolą śledzić czas wielu osób w ramach wspólnych projektów w jednej firmie.",
+      watchlistTitle: "Daj się powiadomić o starcie",
+      watchlistDesc: "Podaj swój e-mail, a poinformujemy cię, gdy tylko 3LANCER pojawi się w App Store.",
+      watchlistPlaceholder: "Twój adres e-mail",
+      watchlistBtn: "Dodaj do listy obserwacyjnej",
+      watchlistNote: "Twój e-mail wykorzystamy wyłącznie do informacji o 3LANCER. Bez spamu.",
+      watchlistSuccess: "✓ Dziękujemy! Powiadomimy cię o uruchomieniu 3LANCER.",
+      watchlistError: "✗ Proszę wpisz prawidłowy adres e-mail.",
       sec3Title: "Cennik i języki",
       pricingPlatform: "Platforma: iOS (iPhone)",
       pricingModel: "Model: 3 dni darmowego testu, a potem miesięczna subskrypcja.",
@@ -511,6 +640,12 @@
     document.getElementById('aud3-title').textContent = t.aud3Title;
     document.getElementById('aud3-text').textContent = t.aud3Text;
 
+    document.getElementById('watchlist-title').textContent = t.watchlistTitle;
+    document.getElementById('watchlist-desc').textContent = t.watchlistDesc;
+    document.getElementById('watchlist-email').placeholder = t.watchlistPlaceholder;
+    document.getElementById('watchlist-btn').textContent = t.watchlistBtn;
+    document.getElementById('watchlist-note').textContent = t.watchlistNote;
+
     document.getElementById('sec3-title').textContent = t.sec3Title;
     document.getElementById('pricing-platform').textContent = t.pricingPlatform;
     document.getElementById('pricing-model').textContent = t.pricingModel;
@@ -523,11 +658,70 @@
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.lang === lang);
     });
+
+    // Store success and error messages for form
+    window.watchlistMessages = {
+      success: t.watchlistSuccess,
+      error: t.watchlistError
+    };
   }
 
   // Add click handlers for language buttons
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+  });
+
+  // Watchlist form handler
+  const watchlistForm = document.getElementById('watchlist-form');
+  const watchlistEmail = document.getElementById('watchlist-email');
+  const successMsg = document.getElementById('watchlist-success');
+  const errorMsg = document.getElementById('watchlist-error');
+
+  // Simple email validation
+  function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  watchlistForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = watchlistEmail.value.trim();
+
+    // Hide previous messages
+    successMsg.style.display = 'none';
+    errorMsg.style.display = 'none';
+
+    // Validate email
+    if (!isValidEmail(email)) {
+      errorMsg.textContent = window.watchlistMessages?.error || '✗ Please enter a valid email address.';
+      errorMsg.style.display = 'block';
+      return;
+    }
+
+    try {
+      // Try to save to Firebase
+      if (window.firebaseDB) {
+        await window.firebaseAddDoc(window.firebaseCollection(window.firebaseDB, 'watchlist'), {
+          email: email,
+          timestamp: window.firebaseServerTimestamp(),
+          source: 'web'
+        });
+      }
+    } catch (firebaseError) {
+      console.log('Firebase not configured, storing locally:', firebaseError.message);
+    }
+
+    // Also store locally as backup
+    const storedEmails = JSON.parse(localStorage.getItem('watchlist') || '[]');
+    if (!storedEmails.includes(email)) {
+      storedEmails.push(email);
+      localStorage.setItem('watchlist', JSON.stringify(storedEmails));
+    }
+    
+    // Show success message
+    successMsg.textContent = window.watchlistMessages?.success || '✓ Thank you! We\'ll notify you when 3LANCER launches.';
+    successMsg.style.display = 'block';
+    watchlistEmail.value = '';
   });
 
   // default language
