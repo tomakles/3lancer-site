@@ -9,6 +9,16 @@
   <!-- favicon – works if you upload favicon.png to the repo root -->
   <link rel="icon" type="image/png" href="favicon.png" />
 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y7LM47GKKD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y7LM47GKKD');
+    window.gtag = gtag;
+  </script>
+
   <!-- Firebase SDK -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -798,6 +808,40 @@ const firebaseConfig = {
     successMsg.textContent = window.watchlistMessages?.success || '✓ Thank you! We\'ll notify you when 3LANCER launches.';
     successMsg.style.display = 'block';
     watchlistEmail.value = '';
+
+    // Analytics: track successful watchlist signup
+    if (window.gtag) {
+      window.gtag('event', 'watchlist_signup', {
+        event_category: 'engagement',
+        event_label: document.documentElement.lang || 'en'
+      });
+    }
+  });
+
+  // Analytics: basic scroll depth tracking
+  let maxScrollSent = 0;
+  const scrollMarks = [25, 50, 75, 90];
+
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const body = document.body;
+    const scrollTop = doc.scrollTop || body.scrollTop;
+    const scrollHeight = (doc.scrollHeight || body.scrollHeight) - window.innerHeight;
+    if (scrollHeight <= 0) return;
+
+    const percent = Math.round((scrollTop / scrollHeight) * 100);
+    for (const mark of scrollMarks) {
+      if (percent >= mark && maxScrollSent < mark) {
+        maxScrollSent = mark;
+        if (window.gtag) {
+          window.gtag('event', 'scroll_depth', {
+            event_category: 'engagement',
+            event_label: mark + '%',
+            value: mark
+          });
+        }
+      }
+    }
   });
 
   // default language
