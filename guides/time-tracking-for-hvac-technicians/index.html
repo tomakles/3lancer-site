@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="/assets/lang.js" defer></script>
+
+  <title>Time tracking app for HVAC technicians: GPS, receipts, billing | 3LANCER</title>
+  <meta name="description" content="A practical guide for HVAC techs: how to track jobsite hours and parts receipts, why GPS time tracking helps, and how to keep cleaner billing history." />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <link rel="canonical" href="https://3lancer.ovh/guides/time-tracking-for-hvac-technicians/" />
+
+  <!-- Favicon & app icons -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+  <link rel="icon" type="image/png" sizes="256x256" href="/favicon-256x256.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#3D642D" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Time tracking app for HVAC technicians: GPS, receipts, billing | 3LANCER" />
+  <meta property="og:description" content="A practical guide for HVAC techs: track jobsite hours and parts receipts, use GPS time tracking, and keep cleaner billing history." />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="3LANCER" />
+  <meta property="og:url" content="https://3lancer.ovh/guides/time-tracking-for-hvac-technicians/" />
+  <meta property="og:image" content="https://3lancer.ovh/logo.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Time tracking app for HVAC technicians: GPS, receipts, billing | 3LANCER" />
+  <meta name="twitter:description" content="A practical guide for HVAC techs: track jobsite hours and parts receipts, use GPS time tracking, and keep cleaner billing history." />
+  <meta name="twitter:image" content="https://3lancer.ovh/logo.png" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Time tracking app for HVAC technicians: GPS, receipts, billing",
+    "datePublished": "2025-12-13",
+    "dateModified": "2025-12-13",
+    "author": {
+      "@type": "Organization",
+      "name": "3LANCER",
+      "url": "https://3lancer.ovh/"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "3LANCER",
+      "url": "https://3lancer.ovh/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://3lancer.ovh/logo.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://3lancer.ovh/guides/time-tracking-for-hvac-technicians/"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --primary-green: #3D642D;
+      --primary-green-dark: #304F23;
+      --accent-yellow: #F6B600;
+      --bg-grey: #F2F3F3;
+      --border-grey: #D7D7D7;
+      --text-main: #111827;
+      --text-muted: #4B5563;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text-main);
+      background: var(--bg-grey);
+    }
+
+    header {
+      background: #ffffff;
+      padding: 24px 20px 40px;
+      border-bottom: 1px solid var(--border-grey);
+    }
+
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .logo-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      background: var(--bg-grey);
+      object-fit: contain;
+    }
+
+    .logo-text {
+      font-weight: 800;
+      font-size: 26px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--primary-green);
+    }
+
+    .logo-text span {
+      color: var(--accent-yellow);
+    }
+
+    .nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border-grey);
+      font-size: 12px;
+      background: #ffffff;
+      color: var(--text-main);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .nav a:hover {
+      border-color: var(--primary-green);
+      color: var(--primary-green);
+    }
+
+    .title {
+      margin-top: 16px;
+      text-align: left;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 32px;
+      color: var(--primary-green);
+      line-height: 1.15;
+    }
+
+    .meta {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 16px 60px;
+    }
+
+    article {
+      background: #ffffff;
+      border: 1px solid var(--border-grey);
+      border-radius: 16px;
+      padding: 22px 20px;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+    }
+
+    article h2 {
+      margin: 18px 0 10px;
+      font-size: 22px;
+      color: var(--primary-green-dark);
+    }
+
+    article p {
+      margin: 0 0 12px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    article ul {
+      margin: 0 0 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .callout {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border-grey);
+      background: #fafafa;
+    }
+
+    .callout a {
+      color: var(--primary-green);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .callout a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px 16px 32px;
+      font-size: 14px;
+      color: #6b7280;
+      border-top: 1px solid var(--border-grey);
+      background: #ffffff;
+    }
+
+    footer a {
+      color: inherit;
+    }
+
+    footer a:hover {
+      color: var(--primary-green);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="top">
+      <a class="brand" href="/">
+        <img src="/favicon-192x192.png" alt="3LANCER logo" class="logo-icon" width="56" height="56">
+        <div class="logo-text"><span>3</span>LANCER</div>
+      </a>
+
+      <div class="nav">
+        <a href="/gps-time-tracking/">GPS time tracking</a>
+        <a href="/receipt-scanner/">Receipt scanner</a>
+        <a href="/reports/">Reports</a>
+        <a href="/guides/">All guides</a>
+      </div>
+    </div>
+
+    <div class="title">
+      <h1>Time tracking app for HVAC technicians: GPS, receipts, billing</h1>
+      <div class="meta">Updated: 2025-12-13 • Read time: ~5 min</div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <article>
+    <p>
+      HVAC work is high‑tempo and jobsite-driven: maintenance calls, installs, troubleshooting, and seasonal spikes.
+      If you are looking for a <strong>time tracking app for HVAC technicians</strong>, the goal is usually simple:
+      capture job hours reliably, keep receipts for parts, and create cleaner billing history without extra admin.
+    </p>
+
+    <h2>What HVAC techs should track (per job)</h2>
+    <p>
+      A project-based workflow keeps everything in one place per customer job.
+    </p>
+    <ul>
+      <li><strong>Labor time</strong>: time on site, per job.</li>
+      <li><strong>Travel time</strong> (optional): depending on your invoicing model.</li>
+      <li><strong>Parts and materials</strong>: receipts/invoices linked to the same job.</li>
+      <li><strong>Notes</strong>: what was done and what was replaced.</li>
+    </ul>
+
+    <h2>Why GPS time tracking fits field service work</h2>
+    <p>
+      When you move between sites, manual timers break easily. GPS-supported tracking matches the on-site workflow:
+      set the address, arrive, work, leave. It helps reduce forgotten hours across multiple calls.
+    </p>
+    <p>
+      Learn more about the feature here:
+      <a href="/gps-time-tracking/">GPS time tracking for contractors & trades</a>.
+    </p>
+
+    <h2>Receipts and parts: keep a clean trail</h2>
+    <p>
+      HVAC jobs often include replacement parts and supplies. Capturing receipts and linking them to the correct job
+      helps with accurate invoicing and cleaner tax records.
+    </p>
+    <p>
+      Read more:
+      <a href="/receipt-scanner/">Receipt scanner app for contractors (AI)</a>.
+    </p>
+
+    <h2>Reports for billing and bookkeeping</h2>
+    <p>
+      The output customers (and accounting) want is a clear summary: hours + expenses for that job.
+      This reduces back-and-forth and gives you a consistent history.
+    </p>
+    <p>
+      Read more:
+      <a href="/reports/">Project reports for invoicing and taxes</a>.
+    </p>
+
+    <div class="callout">
+      Want to be notified when 3LANCER launches?
+      <a href="/?src=guide-hvac#watchlist-form">Join the watchlist</a>.
+    </div>
+  </article>
+</main>
+
+<footer>
+  © 2025 3LANCER • <a href="/">Home</a> • <a href="/guides/">Guides</a> • <a href="/privacy/">Privacy</a> • Contact: <a href="mailto:threelancer.customer@gmail.com">threelancer.customer@gmail.com</a>
+</footer>
+
+</body>
+</html>
+

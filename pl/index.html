@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl-PL">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
   <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
+  <script src="/assets/lang.js" defer></script>
 
   <title>Aplikacja do ewidencji czasu dla freelancerów z GPS i skanerem paragonów | 3LANCER</title>
 
@@ -17,6 +18,7 @@
 
   <!-- hreflang – all languages -->
   <link rel="alternate" href="https://3lancer.ovh/" hreflang="en" />
+  <link rel="alternate" href="https://3lancer.ovh/" hreflang="en-US" />
   <link rel="alternate" href="https://3lancer.ovh/sk/" hreflang="sk" />
   <link rel="alternate" href="https://3lancer.ovh/de/" hreflang="de" />
   <link rel="alternate" href="https://3lancer.ovh/es/" hreflang="es" />
@@ -557,7 +559,7 @@
   <div class="header-inner">
     <div class="header-top">
       <div class="brand">
-        <img src="/logo.png" alt="3LANCER logo" class="logo-icon">
+        <img src="/favicon-192x192.png" alt="3LANCER logo" class="logo-icon" width="72" height="72">
         <div class="logo-text"><span>3</span>LANCER</div>
       </div>
 
@@ -739,6 +741,86 @@
   const successMsg = document.getElementById('watchlist-success');
   const errorMsg = document.getElementById('watchlist-error');
 
+  const ATTR_KEY = '3lancer_attr';
+  const ATTR_TTL_MS = 1000 * 60 * 60 * 24 * 30; // 30 days
+
+  function safeLocalStorageGet(key) {
+    try {
+      return localStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  }
+
+  function safeLocalStorageSet(key, value) {
+    try {
+      localStorage.setItem(key, value);
+    } catch {
+      // Ignore storage errors (e.g., Safari private mode)
+    }
+  }
+
+  function getReferrerHost() {
+    try {
+      return document.referrer ? new URL(document.referrer).hostname : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function getAttributionFromUrl() {
+    const url = new URL(window.location.href);
+    const params = url.searchParams;
+
+    const src = params.get('src');
+    const utm = {
+      source: params.get('utm_source'),
+      medium: params.get('utm_medium'),
+      campaign: params.get('utm_campaign'),
+      term: params.get('utm_term'),
+      content: params.get('utm_content')
+    };
+
+    const hasUtm = Object.values(utm).some((v) => typeof v === 'string' && v.length > 0);
+    const hasSrc = typeof src === 'string' && src.length > 0;
+    if (!hasSrc && !hasUtm) return null;
+
+    return {
+      src: hasSrc ? src : null,
+      utm,
+      savedAt: Date.now()
+    };
+  }
+
+  function getStoredAttribution() {
+    const raw = safeLocalStorageGet(ATTR_KEY);
+    if (!raw) return null;
+    try {
+      const parsed = JSON.parse(raw);
+      if (!parsed || typeof parsed !== 'object') return null;
+      if (!parsed.savedAt || typeof parsed.savedAt !== 'number') return null;
+      if (Date.now() - parsed.savedAt > ATTR_TTL_MS) return null;
+      return parsed;
+    } catch {
+      return null;
+    }
+  }
+
+  function getSignupContext(lang) {
+    const urlAttr = getAttributionFromUrl();
+    if (urlAttr) safeLocalStorageSet(ATTR_KEY, JSON.stringify(urlAttr));
+    const attr = urlAttr || getStoredAttribution();
+
+    return {
+      lang,
+      page: window.location.pathname,
+      src: attr?.src || null,
+      utm: attr?.utm || null,
+      referrer: getReferrerHost(),
+      userLang: navigator.language || null
+    };
+  }
+
   function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -759,10 +841,12 @@
 
     try {
       if (window.firebaseDB) {
+        const context = getSignupContext('pl');
         await window.firebaseAddDoc(window.firebaseCollection(window.firebaseDB, 'watchlist'), {
           email: email,
           timestamp: window.firebaseServerTimestamp(),
-          source: 'web-pl'
+          source: 'web-pl',
+          context
         });
       }
     } catch (firebaseError) {
@@ -780,9 +864,11 @@
     watchlistEmail.value = '';
 
     if (window.gtag) {
+      const context = getSignupContext('pl');
       window.gtag('event', 'watchlist_signup', {
         event_category: 'engagement',
-        event_label: 'pl'
+        event_label: 'pl',
+        src: context.src || undefined
       });
     }
   });
