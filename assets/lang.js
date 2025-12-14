@@ -71,6 +71,22 @@
     return 'en';
   };
 
+  const stripLangPrefix = (path) => {
+    for (const lang of ['sk', 'de', 'es', 'pl']) {
+      const prefix = `/${lang}`;
+      if (path === prefix || path === `${prefix}/`) return '/';
+      if (path.startsWith(`${prefix}/`)) return path.slice(prefix.length) || '/';
+    }
+    return path || '/';
+  };
+
+  const buildPathForLang = (targetLang, basePath) => {
+    if (!supported[targetLang]) return basePath;
+    if (targetLang === 'en') return basePath;
+    if (basePath === '/' || basePath === '/index.html') return supported[targetLang].path;
+    return `/${targetLang}${basePath}`;
+  };
+
   const getBrowserLang = () => {
     const langs = Array.isArray(navigator.languages) && navigator.languages.length
       ? navigator.languages
@@ -122,6 +138,9 @@
 
   const messageLang = supported[browser] ? browser : 'en';
   const message = (suggestedCopy[messageLang] || suggestedCopy.en)(supported[browser].label);
+
+  const basePath = stripLangPrefix(window.location.pathname);
+  const targetHref = `${buildPathForLang(browser, basePath)}${window.location.search || ''}${window.location.hash || ''}`;
 
   const style = document.createElement('style');
   style.textContent = `
@@ -209,7 +228,7 @@
 
   const switchBtn = document.createElement('a');
   switchBtn.className = 'btn primary';
-  switchBtn.href = supported[browser].path;
+  switchBtn.href = targetHref;
   switchBtn.textContent = switchLabel[messageLang] || switchLabel.en;
   switchBtn.addEventListener('click', () => {
     safeSet(STORAGE_KEY, browser);
@@ -243,4 +262,3 @@
 
   document.body.appendChild(notice);
 })();
-

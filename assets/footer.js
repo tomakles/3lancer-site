@@ -22,7 +22,7 @@
       gps: 'GPS',
       receipts: 'Belege',
       reports: 'Berichte',
-      guides: 'Guides',
+      guides: 'Leitfäden',
       privacy: 'Datenschutz',
       contact: 'Kontakt'
     },
@@ -75,11 +75,11 @@
 
   const items = [
     { key: 'home', href: homePath },
-    { key: 'gps', href: '/gps-time-tracking/' },
-    { key: 'receipts', href: '/receipt-scanner/' },
-    { key: 'reports', href: '/reports/' },
-    { key: 'guides', href: '/guides/' },
-    { key: 'privacy', href: '/privacy/' }
+    { key: 'gps', href: `${homePath}gps-time-tracking/` },
+    { key: 'receipts', href: `${homePath}receipt-scanner/` },
+    { key: 'reports', href: `${homePath}reports/` },
+    { key: 'guides', href: `${homePath}guides/` },
+    { key: 'privacy', href: `${homePath}privacy/` }
   ];
 
   const isActive = (href) => {
