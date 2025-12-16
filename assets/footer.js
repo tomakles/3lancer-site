@@ -308,6 +308,53 @@
     return path === href || path.startsWith(href);
   };
 
+  const ensureTopNav = () => {
+    if (document.getElementById('site-topnav')) return;
+
+    const navLinks = items
+      .map((item) => {
+        const label = t[item.key] || labels.en[item.key] || item.key;
+        const activeClass = isActive(item.href) ? 'active' : '';
+        const actionAttr = item.action ? ` data-action="${item.action}"` : '';
+        return `<a href="${item.href}" class="${activeClass}"${actionAttr}>${label}</a>`;
+      })
+      .join('');
+
+    const wrapper = document.createElement('div');
+    wrapper.id = 'site-topnav';
+    wrapper.className = 'site-topnav';
+    wrapper.innerHTML = `
+      <nav class="topnav-pill" aria-label="Primary">
+        ${navLinks}
+      </nav>
+    `.trim();
+
+    const header = document.querySelector('header');
+    const headerInner = header?.querySelector('.header-inner') || null;
+    const headerTop = headerInner?.querySelector('.header-top') || header?.querySelector('.header-top') || null;
+    const brand = headerInner?.querySelector('.brand') || header?.querySelector('.brand') || null;
+
+    if (headerTop?.parentElement) {
+      headerTop.insertAdjacentElement('afterend', wrapper);
+    } else if (brand?.parentElement) {
+      brand.insertAdjacentElement('afterend', wrapper);
+    } else if (headerInner) {
+      headerInner.insertAdjacentElement('afterbegin', wrapper);
+    } else if (header) {
+      header.insertAdjacentElement('afterbegin', wrapper);
+    } else {
+      document.body.insertAdjacentElement('afterbegin', wrapper);
+    }
+
+    const cookieSettingsLink = wrapper.querySelector('[data-action="cookie-settings"]');
+    cookieSettingsLink?.addEventListener('click', (e) => {
+      e.preventDefault();
+      openCookieBanner();
+    });
+  };
+
+  ensureTopNav();
+
   let footer = document.querySelector('footer');
   if (!footer) {
     footer = document.createElement('footer');
