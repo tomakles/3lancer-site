@@ -66,7 +66,15 @@
       text-align: center;
     }
 
-    .brand {
+    
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+.brand {
       display: inline-flex;
       align-items: center;
       gap: 24px;
@@ -161,10 +169,12 @@
 
 <header>
   <div class="header-inner">
-    <a class="brand" href="/sk/">
+    <div class="header-top">
+      <a class="brand" href="/sk/">
       <img src="/favicon-192x192.png" alt="BAXILANCER logo" class="logo-icon" width="72" height="72">
       <div class="logo-text"><span>BAXI</span>LANCER</div>
     </a>
+    </div>
     <h1>Návody</h1>
     <p>Praktické články o GPS meraní času, bločkoch a projektových prehľadoch.</p>
   </div>
