@@ -70,6 +70,20 @@ header .top .nav {
   #watchlist-form {
     scroll-margin-top: 96px;
   }
+
+  .site-header-top,
+  .header-top {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+  
+  .site-header-top .site-lang-switcher,
+  .header-top .lang-switcher {
+    margin-left: 0 !important;
+    width: 100% !important;
+    justify-content: flex-start !important;
+  }
 }
 
 .site-topnav .topnav-pill {
