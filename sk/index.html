@@ -128,19 +128,22 @@
   <!-- Firebase SDK -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
     import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app-check.js";
     import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     const firebaseConfig = {
-      apiKey: "AIzaSyCVFwLlFKZWhaS4O-9EpDU5yr4YRKruwOQ",
-      authDomain: "lancer-watchlist.firebaseapp.com",
-      projectId: "lancer-watchlist",
-      storageBucket: "lancer-watchlist.appspot.com",
-      messagingSenderId: "754434438624",
-      appId: "1:754434438624:web:e93f207d2ef5e2838b6785"
+      apiKey: "AIzaSyBKsllWUmAfBPidpWP_t2IB9OSpM3I9eqY",
+      authDomain: "baxilancer-edb05.firebaseapp.com",
+      projectId: "baxilancer-edb05",
+      storageBucket: "baxilancer-edb05.firebasestorage.app",
+      messagingSenderId: "815130828710",
+      appId: "1:815130828710:web:96ec7949266c5b5af1b967",
+      measurementId: "G-91YQFQX744"
     };
 
     const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
 
     const APP_CHECK_SITE_KEY = "";
     if (APP_CHECK_SITE_KEY) {
@@ -495,42 +498,9 @@
       background: #ffffff;
     }
 
-    @media (max-width: 640px) {
-      .header-top {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-        width: 100%;
-      }
-      .brand {
-        gap: 18px;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-      }
-      .logo-icon {
-        flex-shrink: 0;
-      }
-      .logo-text {
-        font-size: 44px;
-      }
-      .lang-switcher {
-        margin-left: 0;
-        justify-content: flex-end;
-        width: 100%;
-      }
-      .lang-link {
-        padding: 5px 8px;
-        font-size: 11px;
-        gap: 3px;
-      }
-    }
+    
 
-    @media (min-width: 768px) {
-      h1 { font-size: 38px; }
-      header { padding-top: 28px; }
-    }
+    
 
     .faq-list {
       background: #ffffff;
