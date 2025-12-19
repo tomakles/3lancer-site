@@ -1,6 +1,6 @@
 (() => {
-  const STORAGE_KEY = '3lancer_lang_preference';
-  const DISMISS_UNTIL_KEY = '3lancer_lang_dismiss_until';
+  const STORAGE_KEY = 'baxilancer_lang_preference';
+  const DISMISS_UNTIL_KEY = 'baxilancer_lang_dismiss_until';
 
   const supported = {
     en: { path: '/', label: 'English' },

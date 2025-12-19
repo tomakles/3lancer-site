@@ -1,6 +1,6 @@
 (() => {
   const GA_MEASUREMENT_ID = "G-Y7LM47GKKD";
-  const ANALYTICS_CONSENT_KEY = "3lancer_analytics_consent_v1"; // 'granted' | 'denied'
+  const ANALYTICS_CONSENT_KEY = "baxilancer_analytics_consent_v1"; // 'granted' | 'denied'
 
   const supported = {
     en: { path: "/" },
@@ -473,14 +473,14 @@
     })
     .join("");
 
-  const email = "threelancer.customer@gmail.com";
+  const email = "baxilancer@gmail.com";
   footer.innerHTML = `
     <div class="footer-inner">
       <nav class="footer-nav" aria-label="Footer">
         ${navLinks}
       </nav>
       <div class="footer-meta">
-        <span>© ${year} 3LANCER</span>
+        <span>© ${year} BAXILANCER</span>
       </div>
       <div class="footer-contact">
         <span>${t.contact}:</span>

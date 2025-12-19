@@ -1,4 +1,4 @@
-# 3LANCER – Automatic time & expense tracking for freelancers  
+# BAXILANCER – Automatic time & expense tracking for freelancers  
 
 🚀 iOS app built for freelancers, contractors and solo workers.  
 📍 Tracks work hours automatically based on location.  
@@ -39,9 +39,9 @@ _(coming soon)_
 ---
 
 ### Contact  
-📩 support: threelancer.customer@gmail.com  
-🌍 website: https://3lancer.ovh  
-📷 Instagram: https://instagram.com/3lancer.app  
+📩 support: baxilancer@gmail.com  
+🌍 website: https://baxilancer.ovh  
+📷 Instagram: https://instagram.com/baxilancer.app  
 
 ---
 

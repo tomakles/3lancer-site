@@ -1,4 +1,4 @@
-# Firebase Setup Guide for 3LANCER Watchlist
+# Firebase Setup Guide for BAXILANCER Watchlist
 
 This guide explains how to set up Firebase Firestore to store email watchlist submissions.
 
@@ -6,7 +6,7 @@ This guide explains how to set up Firebase Firestore to store email watchlist su
 
 1. Go to [Firebase Console](https://console.firebase.google.com/)
 2. Click **"Add project"** or **"Create a project"**
-3. Enter project name: `3lancer-watchlist` (or your preferred name)
+3. Enter project name: `baxilancer-watchlist` (or your preferred name)
 4. Click **Create project** (disable Google Analytics if you don't need it)
 5. Wait for the project to be created
 
@@ -15,7 +15,7 @@ This guide explains how to set up Firebase Firestore to store email watchlist su
 1. In the Firebase Console, click the **gear icon** ⚙️ → **Project Settings**
 2. Scroll down to **Your apps** section
 3. Click **`</>` (Web)** to add a web app
-4. Enter app name: `3lancer-web`
+4. Enter app name: `baxilancer-web`
 5. Check **"Also set up Firebase Hosting for this app"** (optional)
 6. Click **Register app**
 7. Copy the Firebase config object that appears - it looks like:
